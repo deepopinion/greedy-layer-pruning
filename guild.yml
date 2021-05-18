@@ -1,0 +1,104 @@
+baseline:
+  description: Baseline
+  main: run_glue
+  sourcecode:
+    - include:
+        dir: layer_files
+    - include:
+        dir: models
+    - exclude:
+        dir: experiments
+  flags-dest: args
+  flags:
+    output_dir: "experiments"
+    model_name_or_path: ["bert-base-uncased", "roberta-base"]
+    seed: [40,41,42,43,44]
+    do_train: True
+    do_eval: True
+    max_seq_length: 128
+    per_device_train_batch_size: 32
+    num_train_epochs: 3
+    learning_rate: 2e-5
+    task_name: ["rte", "mrpc", "stsb", "cola", "sst2", "qnli", "qqp", "mnli"]
+    prune_n_layers: 0
+    prune_method: "none"
+
+
+distillation:
+  description: Distillation
+  main: run_glue
+  sourcecode:
+    - include:
+        dir: layer_files
+    - include:
+        dir: models
+    - exclude:
+        dir: experiments
+  flags-dest: args
+  flags:
+    output_dir: "experiments"
+    model_name_or_path: ["distilbert-base-uncased", "google/mobilebert-uncased"]
+    seed: [40,41,42,43,44]
+    do_train: True
+    do_eval: True
+    max_seq_length: 128
+    per_device_train_batch_size: 32
+    num_train_epochs: 3
+    learning_rate: 2e-5
+    task_name: ["rte", "mrpc", "stsb", "cola", "sst2", "qnli", "qqp", "mnli"]
+    prune_n_layers: 0
+    prune_method: "none"
+
+
+prune-greedy:
+  description: Prune greedy
+  main: run_glue
+  sourcecode:
+    - include:
+        dir: layer_files
+    - include:
+        dir: models
+    - exclude:
+        dir: experiments
+  flags-dest: args
+  flags:
+    output_dir: "experiments/tmp"
+    overwrite_output_dir: True
+    model_name_or_path: ["bert-base-uncased", "roberta-base"]
+    seed: [40,41,42,43,44]
+    do_train: True
+    do_eval: True
+    max_seq_length: 128
+    per_device_train_batch_size: 32
+    num_train_epochs: 3
+    learning_rate: 2e-5
+    task_name: ["rte", "mrpc", "stsb", "cola", "sst2", "qnli", "qqp", "mnli"]
+    prune_n_layers: [2,4,6]
+    prune_method: "prune-greedy"
+
+
+prune-top:
+  description: Prune top-layers
+  main: run_glue
+  sourcecode:
+    - include:
+        dir: layer_files
+    - include:
+        dir: models
+    - exclude:
+        dir: experiments
+  flags-dest: args
+  flags:
+    output_dir: "experiments/tmp"
+    overwrite_output_dir: True
+    model_name_or_path: ["bert-base-uncased", "roberta-base"]
+    seed: [40,41,42,43,44]
+    do_train: True
+    do_eval: True
+    max_seq_length: 128
+    per_device_train_batch_size: 32
+    num_train_epochs: 3
+    learning_rate: 2e-5
+    task_name: ["rte", "mrpc", "stsb", "cola", "sst2", "qnli", "qqp", "mnli"]
+    prune_n_layers: [2,4,6]
+    prune_method: "top-layers"
