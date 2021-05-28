@@ -24,8 +24,8 @@ baseline:
     prune_method: "none"
 
 
-distillation:
-  description: Distillation
+distilbert:
+  description: DistilBERT
   main: run_glue
   sourcecode:
     - include:
@@ -37,7 +37,7 @@ distillation:
   flags-dest: args
   flags:
     output_dir: "experiments"
-    model_name_or_path: ["distilbert-base-uncased", "google/mobilebert-uncased"]
+    model_name_or_path: ["distilbert-base-uncased"]
     seed: [40,41,42,43,44]
     do_train: True
     do_eval: True
@@ -45,6 +45,32 @@ distillation:
     per_device_train_batch_size: 32
     num_train_epochs: 3
     learning_rate: 2e-5
+    task_name: ["rte", "mrpc", "stsb", "cola", "sst2", "qnli", "qqp", "mnli"]
+    prune_n_layers: 0
+    prune_method: "none"
+
+
+mobilebert:
+  description: MobileBERT
+  main: run_glue
+  sourcecode:
+    - include:
+        dir: layer_files
+    - include:
+        dir: models
+    - exclude:
+        dir: experiments
+  flags-dest: args
+  flags:
+    output_dir: "experiments"
+    model_name_or_path: ["google/mobilebert-uncased"]
+    seed: [40,41,42,43,44]
+    do_train: True
+    do_eval: True
+    max_seq_length: 128
+    per_device_train_batch_size: 32
+    num_train_epochs: 3
+    learning_rate: 7e-5
     task_name: ["rte", "mrpc", "stsb", "cola", "sst2", "qnli", "qqp", "mnli"]
     prune_n_layers: 0
     prune_method: "none"
