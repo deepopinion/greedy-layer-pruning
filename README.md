@@ -1,9 +1,9 @@
 # Greedy-layer-pruning (GLP)
 
-This is the original implementation of the GLP [paper](https://arxiv.org/abs/2105.14839).
+This is the original implementation of GLP [paper](https://arxiv.org/abs/2105.14839).
 
     @misc{peer2021greedy,
-          title={Greedy Layer Pruning: Decreasing Inference Time of Transformer Models}, 
+          title={Greedy Layer Pruning: Decreasing Inference Time of Transformer Models},
           author={David Peer and Sebastian Stabinger and Stefan Engl and Antonio Rodriguez-Sanchez},
           year={2021},
           eprint={2105.14839},
@@ -11,8 +11,8 @@ This is the original implementation of the GLP [paper](https://arxiv.org/abs/210
           primaryClass={cs.CL}
     }
 
-Greedy layer pruning (GLP) is introduced to (1) outperform current state-of-the-art for 
-layer-wise pruning (2) close the performance gap when compared to knowledge distillation, 
+Greedy layer pruning (GLP) is introduced to (1) outperform current state-of-the-art for
+layer-wise pruning (2) close the performance gap when compared to knowledge distillation,
 while (3) using only a modest budget.
 
 The source code contains two main stages: The first (```prune.py```) stage finds the
@@ -20,7 +20,10 @@ layers to prune either with GLP or with the optimum strategy as presented
 in the paper. This stage writes so-called layer-files (```layer_files/```) which
 contain an ordered list of layers that should be pruned for a given model and task.
 This file is then used to evaluate the performance of different
-methods on the GLUE benchmark (```run_glue.py```).
+methods on the GLUE benchmark (```run_glue.py```) where pruning is executed based
+on the order of layers as written in the layer files.
+Note: Experimentally we also executed GLP directly on the dev set and included the layers
+files in `layer_files_dev_set` for future work.
 
 ## Setup
 To install all requirements simply call the ```setup.sh``` script which
