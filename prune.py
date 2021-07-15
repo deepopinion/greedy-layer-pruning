@@ -373,7 +373,15 @@ def main():
     datasets = datasets.map(preprocess_function, batched=True, load_from_cache_file=not data_args.overwrite_cache)
 
     train_dataset = datasets["train"]
-    eval_dataset = datasets["validation_matched" if data_args.task_name == "mnli" else "validation"]
+
+    # If the following line is uncommented, the dev set is used. Otherwise a 15% split of the training set is used.
+    # eval_dataset = datasets["validation_matched" if data_args.task_name == "mnli" else "validation"]
+
+    train_size = int(len(train_dataset) * 0.85)
+    split_dataset = train_dataset.train_test_split(train_size=train_size, shuffle=True)
+    train_dataset = split_dataset["train"]
+    eval_dataset = split_dataset["test"]
+
     if data_args.task_name is not None or data_args.test_file is not None:
         test_dataset = datasets["test_matched" if data_args.task_name == "mnli" else "test"]
 
