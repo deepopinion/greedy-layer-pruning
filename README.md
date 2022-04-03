@@ -2,13 +2,12 @@
 
 This is the original implementation of GLP [paper](https://arxiv.org/abs/2105.14839).
 
-    @misc{peer2021greedy,
-          title={Greedy Layer Pruning: Decreasing Inference Time of Transformer Models},
-          author={David Peer and Sebastian Stabinger and Stefan Engl and Antonio Rodriguez-Sanchez},
-          year={2021},
-          eprint={2105.14839},
-          archivePrefix={arXiv},
-          primaryClass={cs.CL}
+    @article{peer2022greedy,
+      title={Greedy-layer Pruning: Speeding up Transformer Models for Natural Language Processing},
+      author={Peer, David and Stabinger, Sebastian and Engl, Stefan and Rodr{\'\i}guez-S{\'a}nchez, Antonio},
+      journal={Pattern Recognition Letters},
+      year={2022},
+      publisher={Elsevier}
     }
 
 Greedy layer pruning (GLP) is introduced to (1) outperform current state-of-the-art for
